@@ -5,6 +5,7 @@ using API.Core.DomainModels.Customers;
 using API.Core.Models.Results;
 using API.Infrastructure.EF.Services;
 using API.Validations;
+using API.ValidationServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,15 +15,17 @@ namespace API.Controllers
     public class CustomerController : ControllerBase
     {
         private ICustomerService customerService { get; }
-        public CustomerController(ICustomerService customerService)
+        private ICustomerValidationService customerValidation { get; }
+        public CustomerController(ICustomerService customerService, ICustomerValidationService customerValidation)
         {
             this.customerService = customerService;
+            this.customerValidation = customerValidation;
         }
         
         [HttpGet("{customerId}")]
         public async Task<ActionResult<Result<CustomerDTO>>> GetById(int customerId)
         {
-            var validateResult = CustomerValidationService.ValidateId(customerId);
+            var validateResult = customerValidation.ValidateId(customerId);
             if (!validateResult.Success)
             {
                 var errorResult = Result<CustomerDTO>.MakeFail(validateResult);

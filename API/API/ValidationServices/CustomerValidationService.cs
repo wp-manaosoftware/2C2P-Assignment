@@ -1,8 +1,8 @@
-﻿namespace API.Validations
+﻿namespace API.ValidationServices
 {
-    public static class CustomerValidationService
+    public class CustomerValidationService: ICustomerValidationService
     {
-        public static ValidationResult ValidateId(int Id)
+        public ValidationResult ValidateId(int Id)
         {
             if (Id < 1)
                 return new ValidationResult(false, "Id", "Invalid Customer ID");
