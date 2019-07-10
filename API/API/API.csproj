@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <StartupObject>API.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="StructureMap" Version="4.7.1" />
+    <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\EF\NewFolder\" />
   </ItemGroup>
 
 </Project>
