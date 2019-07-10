@@ -62,5 +62,33 @@ namespace API.Controllers
 
             return NotFound();
         }
+
+        [HttpGet("GetByEmailAddressAndId")]
+        public async Task<ActionResult<Result<CustomerDTO>>> GetByEmailAddressAndId([FromQuery]string emailAddr, int customerId)
+        {
+            var validateBothEmptyResult = customerValidation.ValidateEmailAddressAndIdBothEmpty(emailAddr, customerId);
+            if (!validateBothEmptyResult.Success)
+            {
+                var errorResult = Result<CustomerDTO>.MakeFail(validateBothEmptyResult);
+                return BadRequest(errorResult);
+            }
+
+            var validateResult = customerValidation.ValidateEmailAddressAndId(emailAddr, customerId);
+            if (!validateResult.Success)
+            {
+                var errorResult = Result<CustomerDTO>.MakeFail(validateResult);
+                return BadRequest(errorResult);
+            }
+
+            var customer = await customerService.GetByEmailAddressAndId(emailAddr, customerId);
+            if (customer != null)
+            {
+                var dto = customer.ToDTO();
+                var result = Result<CustomerDTO>.MakeSuccess(dto);
+                return result;
+            }
+
+            return NotFound();
+        }
     }
 }

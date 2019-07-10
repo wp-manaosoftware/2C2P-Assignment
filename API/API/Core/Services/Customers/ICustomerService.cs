@@ -8,7 +8,8 @@ namespace API.Infrastructure.EF.Services
 {
     public interface ICustomerService
     {
-        Task<Customer> GetById(int Id);
+        Task<Customer> GetById(int customerId);
         Task<Customer> GetByEmailAddress(string emailAddr);
+        Task<Customer> GetByEmailAddressAndId(string emailAddr, int customerId);
     }
 }

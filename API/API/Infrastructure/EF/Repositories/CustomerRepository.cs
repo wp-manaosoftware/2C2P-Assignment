@@ -24,7 +24,16 @@ namespace API.Infrastructure.EF.Repositories
 
         public async Task<Customer> GetByEmailAddress(string emailAddr)
         {
-            return await context.Customers.Include(_ => _.Transactions).SingleOrDefaultAsync(_ => _.ContactEmail == emailAddr);
+            return await context.Customers
+                .Include(_ => _.Transactions)
+                .SingleOrDefaultAsync(_ => _.ContactEmail == emailAddr);
+        }
+
+        public async Task<Customer> GetByEmailAddressAndId(string emailAddr, int id)
+        {
+            return await context.Customers
+                .Include(_ => _.Transactions)
+                .SingleOrDefaultAsync(_ => _.ContactEmail == emailAddr && _.Id == id);
         }
     }
 }

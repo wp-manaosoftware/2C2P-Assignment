@@ -32,5 +32,14 @@ namespace API.Infrastructure.EF.Services
 
             return customer;
         }
+
+        public async Task<Customer> GetByEmailAddressAndId(string emailAddr, int customerId)
+        {
+            var customer = await customerRepository.GetByEmailAddressAndId(emailAddr, customerId);
+            if (customer != null)
+                customer.Transactions.OrderByDescending(_ => _.Id);
+
+            return customer;
+        }
     }
 }

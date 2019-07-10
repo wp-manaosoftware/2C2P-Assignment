@@ -10,5 +10,6 @@ namespace API.Infrastructure.EF.Repositories
     {
         Task<Customer> GetById(int id);
         Task<Customer> GetByEmailAddress(string emailAddr);
+        Task<Customer> GetByEmailAddressAndId(string emailAddr, int id);
     }
 }
