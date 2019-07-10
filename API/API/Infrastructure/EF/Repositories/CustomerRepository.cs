@@ -17,7 +17,7 @@ namespace API.Infrastructure.EF.Repositories
             this.context = context;
         }
 
-        public async Task<Customer> GetCustomerById(int customerId)
+        public async Task<Customer> GetById(int customerId)
         {
             return await context.Customers.SingleOrDefaultAsync(_ => _.Id == customerId);
         }

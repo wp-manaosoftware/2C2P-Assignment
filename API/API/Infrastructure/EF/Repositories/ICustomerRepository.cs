@@ -8,6 +8,6 @@ namespace API.Infrastructure.EF.Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer> GetCustomerById(int Id);
+        Task<Customer> GetById(int Id);
     }
 }
