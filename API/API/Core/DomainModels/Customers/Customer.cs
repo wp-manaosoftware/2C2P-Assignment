@@ -11,6 +11,6 @@ namespace API.Core.DomainModels
         public string Name { get; set; }
         public string ContactEmail { get; set; }
         public string MobileNo { get; set; }
-        public ICollection<Transection> Transections { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }
