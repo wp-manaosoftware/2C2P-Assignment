@@ -12,5 +12,17 @@ namespace API.Core.DomainModels
         public DateTimeOffset TransactionDate { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+
+        public static TransactionDTO Cast(Transaction t)
+        {
+            return  new TransactionDTO()
+            {
+                Id = t.Id,
+                CurrencyCode = t.CurrencyCode,
+                Amount = t.Amount,
+                Status = t.Status,
+                TransactionDate = t.TransactionDate
+            };
+        }
     }
 }

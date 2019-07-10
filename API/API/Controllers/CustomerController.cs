@@ -1,9 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using API.Core.DomainModels;
+using API.Core.DomainModels.Customers;
+using API.Core.Models.Results;
 using API.Infrastructure.EF.Services;
+using API.Validations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -19,9 +20,24 @@ namespace API.Controllers
         }
         
         [HttpGet("{customerId}")]
-        public async Task<ActionResult<Customer>> GetById(int customerId)
+        public async Task<ActionResult<Result<CustomerDTO>>> GetById(int customerId)
         {
-            return await customerService.GetById(customerId);
+            var validateResult = CustomerValidationService.ValidateId(customerId);
+            if (!validateResult.Success)
+            {
+                var errorResult = Result<CustomerDTO>.MakeFail(validateResult);
+                return BadRequest(errorResult);
+            }
+
+            var customer =  await customerService.GetById(customerId);
+            if (customer != null)
+            {
+                var dto = customer.ToDTO();
+                var result = Result<CustomerDTO>.MakeSuccess(dto);
+                return result;
+            }
+
+            return NotFound();
         }
     }
 }

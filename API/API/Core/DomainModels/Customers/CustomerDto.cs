@@ -1,16 +1,16 @@
-﻿using API.Core.DomainModels.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Core.DomainModels
+namespace API.Core.DomainModels.Customers
 {
-    public class Customer : EntityBase
+    public class CustomerDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ContactEmail { get; set; }
         public string MobileNo { get; set; }
-        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public List<TransactionDTO> Transactions { get; set; }
     }
 }
