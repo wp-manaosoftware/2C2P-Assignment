@@ -1,11 +1,7 @@
 ﻿using API.Infrastructure.EF.Repositories;
 using API.Infrastructure.EF.Services;
-using API.Validations;
+using API.ValidationServices;
 using StructureMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.IoC
 {
@@ -15,9 +11,7 @@ namespace API.IoC
         {
             For<ICustomerRepository>().Use<CustomerRepository>();
             For<ICustomerService>().Use<CustomerService>();
-            For<ICustomerValidationService>.Use<CustomerValidationService>();
-        }
-
-        
+            For<ICustomerValidationService>().Use<CustomerValidationService>();
+        }        
     }
 }

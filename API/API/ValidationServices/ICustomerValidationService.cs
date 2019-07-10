@@ -3,5 +3,6 @@
     public interface ICustomerValidationService
     {
         ValidationResult ValidateId(int Id);
+        ValidationResult ValidateEmailAddress(string emailAddr);
     }
 }

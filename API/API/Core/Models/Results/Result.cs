@@ -1,8 +1,5 @@
-﻿using API.Validations;
-using System;
+﻿using API.ValidationServices;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Core.Models.Results
 {

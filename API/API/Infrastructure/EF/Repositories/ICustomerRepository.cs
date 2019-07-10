@@ -8,6 +8,7 @@ namespace API.Infrastructure.EF.Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer> GetById(int Id);
+        Task<Customer> GetById(int id);
+        Task<Customer> GetByEmailAddress(string emailAddr);
     }
 }

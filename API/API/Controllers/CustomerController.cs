@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using API.Core.DomainModels.Customers;
 using API.Core.Models.Results;
 using API.Infrastructure.EF.Services;
-using API.Validations;
 using API.ValidationServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +32,27 @@ namespace API.Controllers
             }
 
             var customer =  await customerService.GetById(customerId);
+            if (customer != null)
+            {
+                var dto = customer.ToDTO();
+                var result = Result<CustomerDTO>.MakeSuccess(dto);
+                return result;
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet("GetByEmailAddress")]
+        public async Task<ActionResult<Result<CustomerDTO>>> GetByEmailAddress([FromQuery]string emailAddr)
+        {
+            var validateResult = customerValidation.ValidateEmailAddress(emailAddr);
+            if (!validateResult.Success)
+            {
+                var errorResult = Result<CustomerDTO>.MakeFail(validateResult);
+                return BadRequest(errorResult);
+            }
+
+            var customer = await customerService.GetByEmailAddress(emailAddr);
             if (customer != null)
             {
                 var dto = customer.ToDTO();
