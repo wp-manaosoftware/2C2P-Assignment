@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace API.IoC
 {
-    public class StructuremapRegistry : Registry
+    public class StructureMapRegistry : Registry
     {
-        public StructuremapRegistry()
+        public StructureMapRegistry()
         {
             For<ICustomerRepository>().Use<CustomerRepository>();
             For<ICustomerService>().Use<CustomerService>();
