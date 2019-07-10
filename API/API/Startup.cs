@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Infrastructure.EF;
+using API.Infrastructure.EF.Repositories;
+using API.Infrastructure.EF.Services;
+using API.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using StructureMap;
 using WebAPI.Infrastructure.EF;
 
 namespace API
@@ -30,6 +34,17 @@ namespace API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<AssignmentDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ICustomerService, CustomerService>();
+
+            var container = new Container();
+
+            container.Configure(config =>
+            {
+                config.AddRegistry(new StructuremapRegistry());
+                config.Populate(services);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
