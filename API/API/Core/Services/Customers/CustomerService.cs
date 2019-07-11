@@ -24,10 +24,7 @@ namespace API.Infrastructure.EF.Services
             var customer = await customerRepository.GetByEmailAddress(emailAddr);
             if (customer != null)
             {
-                var latestTransection = customer.Transactions.OrderByDescending(_ => _.TransactionDate).FirstOrDefault();
-
-                customer.Transactions = new Collection<Transaction>();
-                customer.Transactions.Add(latestTransection);
+                customer.Transactions = customer.Transactions.OrderByDescending(_ => _.TransactionDate).Take(5).ToList();
             }
 
             return customer;
@@ -37,7 +34,7 @@ namespace API.Infrastructure.EF.Services
         {
             var customer = await customerRepository.GetByEmailAddressAndId(emailAddr, customerId);
             if (customer != null)
-                customer.Transactions.OrderByDescending(_ => _.Id);
+                customer.Transactions.OrderByDescending(_ => _.Id).Take(5);
 
             return customer;
         }
