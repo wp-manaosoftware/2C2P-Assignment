@@ -15,14 +15,18 @@ namespace API.Infrastructure.EF.Seeding
             {
                 Name = "Customer1",
                 ContactEmail = "customer1@customer.com",
-                MobileNo = "(+66)1150"
+                MobileNo = "(+66)1150",
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
 
             var customer2 = new Customer()
             {
                 Name = "Customer2",
                 ContactEmail = "customer2@customer.com",
-                MobileNo = "(+66)1112"
+                MobileNo = "(+66)1112",
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
 
             context.Add(customer1);

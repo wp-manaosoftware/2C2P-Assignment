@@ -1,5 +1,6 @@
 ﻿using API.Core.DomainModels;
 using API.Core.DomainModels.Transactions;
+using System;
 using System.Linq;
 using WebAPI.Infrastructure.EF;
 
@@ -17,21 +18,30 @@ namespace API.Infrastructure.EF.Seeding
                 CurrencyCode = "USD",
                 Amount = (decimal)39.75,
                 Status = Status.Success,
-                CustomerId = customer1.Id
+                CustomerId = customer1.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
             var transaction2C1 = new Transaction()
             {
                 CurrencyCode = "THB",
                 Amount = (decimal)10,
                 Status = Status.Failed,
-                CustomerId = customer1.Id
+                CustomerId = customer1.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
             var transaction3C1 = new Transaction()
             {
                 CurrencyCode = "EUR",
                 Amount = (decimal)35.09,
                 Status = Status.Canceled,
-                CustomerId = customer1.Id
+                CustomerId = customer1.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
 
             context.Add(transaction1C1);
@@ -43,21 +53,30 @@ namespace API.Infrastructure.EF.Seeding
                 CurrencyCode = "GBP",
                 Amount = (decimal)11,
                 Status = Status.Success,
-                CustomerId = customer2.Id
+                CustomerId = customer2.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
             var transaction2C2 = new Transaction()
             {
                 CurrencyCode = "CNY",
                 Amount = (decimal)9553.35,
                 Status = Status.Failed,
-                CustomerId = customer2.Id
+                CustomerId = customer2.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
             var transaction3C2 = new Transaction()
             {
                 CurrencyCode = "JYP",
                 Amount = (decimal)365,
                 Status = Status.Canceled,
-                CustomerId = customer2.Id
+                CustomerId = customer2.Id,
+                TransactionDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
 
             context.Add(transaction1C2);
