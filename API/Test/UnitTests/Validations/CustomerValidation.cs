@@ -123,7 +123,7 @@ namespace Test
             var result = validate.ValidateEmailAddressAndIdBothEmpty(emailAddr, id);
 
             Assert.False(result.Success);
-            Assert.Equal(result.Message, noInquiryErrorMsg);
+            Assert.Equal(noInquiryErrorMsg, result.Message);
         }
     }
 }
